@@ -1,10 +1,10 @@
-
+import re
 
 def add(str_nums) :
     if len(str_nums) == 0 :
         return 0
     
-    nums = str_nums.split(',')
+    nums = re.split(',|\n',str_nums)
     
     result = 0
     for num in nums :
