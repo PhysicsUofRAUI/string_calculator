@@ -43,6 +43,38 @@ class TestStringCalculatorWithNewlinesAndCommasAsDelimeters(unittest.TestCase):
         mystr = '\n5,2,6'
         
         self.assertEqual(string_calculator.add(mystr), 13)
-
+        
+class TestStringCalculatorWithCustomDelimeters(unittest.TestCase):
+    def test_with_semi_colon(self):
+        mystr = '//;\n1;3;4'
+        
+        self.assertEqual(string_calculator.add(mystr), 8)
+        
+    def test_with_dollar_signs(self):
+        mystr = '//$\n1$2$3'
+        
+        self.assertEqual(string_calculator.add(mystr), 6)
+        
+    def test_with_at_signs(self):
+        mystr = '//@\n2@3@8'
+        
+        self.assertEqual(string_calculator.add(mystr), 13)
+        
+class TestCustomSplit(unittest.TestCase) :
+    def test_semi_colon(self):
+        mystr = '//;\n1;3;4'
+        
+        self.assertEqual(string_calculator.custom_split(mystr), ['1','3','4'])
+        
+    def test_dollar_signs(self):
+        mystr = '//$\n1$2$3'
+        
+        self.assertEqual(string_calculator.custom_split(mystr), ['1','2','3'])
+        
+    def test_at_signs(self):
+        mystr = '//@\n2@3@8'
+        
+        self.assertEqual(string_calculator.custom_split(mystr), ['2','3','8'])
+        
 if __name__ == '__main__':
     unittest.main()
