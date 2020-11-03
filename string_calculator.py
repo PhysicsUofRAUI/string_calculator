@@ -18,16 +18,26 @@ def add(str_nums) :
     nums = custom_split(str_nums)
     
     result = 0
+    negative_nums = []
     for num in nums :
         try :
             int_num = int(num)
         except :
             continue
         
+        if int_num < 0 :
+            negative_nums.append(int_num)
+        
         result = result + int_num
     
-    return result
-    
+    if negative_nums == [] :
+        return result
+    else :
+        negative_string = ''
+        for num in negative_nums :
+            negative_string = negative_string + ", " + str(num)
+            
+        raise Exception("Negatives not allowed. The numbers that caused this error were" + negative_string)
     
 
 print(add('1,2,5'))

@@ -59,7 +59,29 @@ class TestStringCalculatorWithCustomDelimeters(unittest.TestCase):
         mystr = '//@\n2@3@8'
         
         self.assertEqual(string_calculator.add(mystr), 13)
+
+class TestStringCalculatorWithNegativeNums(unittest.TestCase) :
+    def test_with_dollar_signs(self):
+        mystr = '//$\n1$2$-3'
         
+        with self.assertRaises(Exception) as context: 
+            string_calculator.add(mystr)
+            self.assertEqual("Negatives not allowed. The numbers that caused this error were, -3" + negative_string, str(context.exception))
+    
+    def test_newline_at_the_start(self):
+        mystr = '\n5,-2,6'
+        
+        with self.assertRaises(Exception) as context: 
+            string_calculator.add(mystr)
+            self.assertEqual("Negatives not allowed. The numbers that caused this error were, -2" + negative_string, str(context.exception))
+        
+    def test_multiple_negatives(self):
+        mystr = '5,-2,6,-8'
+        
+        with self.assertRaises(Exception) as context: 
+            string_calculator.add(mystr)
+            self.assertEqual("Negatives not allowed. The numbers that caused this error were, -2, -8" + negative_string, str(context.exception))
+            
 class TestCustomSplit(unittest.TestCase) :
     def test_semi_colon(self):
         mystr = '//;\n1;3;4'
